@@ -1,31 +1,51 @@
-import java,util.List;
-
-public class Book{
+import java.util.List;
+//class for book object
+//contains book id, title, authors, tags and description
+//provides getters for attributes
+public class Book {
     private final int bookId;
     private final String title;
-    private final  List<String> authors;
-    private final  List<String> tags;//hold genres 
+    private final List<String> authors;
+    private final List<String> tags;
+    private String description;
 
-
-    public Book(String title, List<String> authors, List<String> tags){
+    public Book(int bookId, String title, List<String> authors, List<String> tags) {
+        this.bookId = bookId;
         this.title = title;
         this.authors = authors;
         this.tags = tags;
-        this.bookId= bookId;
+        this.description = "No available description";
     }
-    //getters for title, author, and gere
-    public String getTitle(){
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public String getTitle() {
         return title;
     }
-    public String getAuthor(){
-        return author;
+
+    public List<String> getAuthor() {
+        return authors;
     }
-    public String getTags(){
+
+    public List<String> getTags() {
         return tags;
     }
+
     @Override
-    //display book info in a readable format
-    public String toString(){
-        return "'" + title + "' by " + String.join(", ", authors) + " [" + String.join(", ", tags) + "]";
+    public String toString() {
+        // Cleans the title to remove any trailing year in parentheses
+        String cleanTitle = this.title.replaceAll(" \\(.*\\)$", "");  
+        String authorString = String.join(", ", this.authors);
+        return "'" + cleanTitle + "' by " + authorString;
     }
 }
